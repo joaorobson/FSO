@@ -79,6 +79,9 @@ int main(int argc, char **argv ){
         i--;
 
     }
+    /*
+        This if is referent to the son process. A belgian child
+    */
     if(pid == 0){
         srand( (unsigned)time(NULL) ^ (getpid()<<16) );
         sem_init(&s[count],1,1);
