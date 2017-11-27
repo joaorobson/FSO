@@ -1,0 +1,8 @@
+*.swp
+*.o*
+*.ko*
+*.mod*
+modules*
+Module*
+
+
