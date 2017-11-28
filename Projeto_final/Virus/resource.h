@@ -1,5 +1,3 @@
-#include <math.h>
-
 // called when 'write' system call is done on the device file
 static ssize_t dev_infectado(struct file *filp, const char *buff, size_t len, loff_t *off){
 
@@ -9,13 +7,15 @@ static ssize_t dev_infectado(struct file *filp, const char *buff, size_t len, lo
 
     int i = 0;
     char tmp;
-    for(i = 0; i < floor(strlen(buff)/2); i++){
-        tmp = buff[i];
-        buff[i] = buff[strlen(buff) - i];
-        buff[strlen(buff) - i] = tmp;
+    char *a;
+    strncpy_from_user(a, buff, (long) len);
+    for(i = 0; i < (strlen(a)/2); i++){
+        tmp = a[i];
+        a[i] = a[strlen(a) - i];
+        a[strlen(a) - i] = tmp;
     }
 
-    ret = copy_from_user(msg,buff,len);
+    ret = copy_from_user(msg,a,len);
 
     if(ret)
     return -EFAULT;
